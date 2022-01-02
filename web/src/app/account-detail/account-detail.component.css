@@ -1,0 +1,48 @@
+.details-header {
+  display: flex;
+
+  /*?justify-content: ;*/
+}
+
+.details-header > h1 {
+  margin-left: 20px;
+}
+
+.service-icon {
+  width: 75px;
+  height: 75px;
+
+  border: 1px solid var(--luna-blue-2);
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.content {
+  margin: 5px 20px;
+}
+
+.form-grid {
+  display: grid;
+
+  grid-template-columns: 20% 75%;
+  grid-row-gap: 20px;
+
+  font-size: 14pt;
+}
+
+.form-label {
+  display: block;
+
+  margin: 6px 10px;
+
+  text-align: right;
+}
+
+
+
+.form-controls {
+  margin-top: 100px;
+
+  display: flex;
+  justify-content: space-between;
+}

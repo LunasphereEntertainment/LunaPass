@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="account-listing" *ngFor="let account of accountList" [routerLink]="['/details', account.id]">
+
+    <div class="service-icon" *ngIf="account.icon">
+      <img [src]="account.icon" />
+    </div>
+
+    <div class="account-info">
+      <h1>{{account.name}}</h1>
+      <h3>{{account.username}}</h3>
+    </div>
+
+    <div class="account-actions">
+      <button title="View Password">
+        <fa-icon class="fa-lg" [icon]="showIcon"></fa-icon>
+      </button>
+      <button title="View/Edit Account" [routerLink]="['/details', account.id]">
+        <fa-icon class="fa-lg" [icon]="editIcon"></fa-icon>
+      </button>
+      <button class="luna-danger" title="Delete Account">
+        <fa-icon class="fa-lg" [icon]="deleteIcon"></fa-icon>
+      </button>
+    </div>
+
+  </div>
+</div>

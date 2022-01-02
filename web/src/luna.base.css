@@ -1,0 +1,85 @@
+:root {
+  --luna-text: #00B7FF;
+
+  --luna-bg-dark: #1d1f2e;
+
+  --luna-white: white;
+
+  --luna-blue-1: #1e275e;
+  --luna-blue-2: #294678;
+  --luna-blue-3: #3a6edc;
+
+  --luna-red-1: #6a011c;
+  --luna-red-2: #c10121;
+  --luna-red-3: #ff234f;
+
+  --luna-success-1: #004d00;
+  --luna-success-2: #008600;
+  --luna-success-3: #00c900;
+
+  --luna-warn-1: #6f7700;
+  --luna-warn-2: #938700;
+  --luna-warn-3: #f3f300;
+
+  --luna-panel-bg: rgba(57, 62, 64, 0.34);
+
+  --luna-frost-bg: rgba(100, 100, 100, 0.25);
+  --luna-frost-outline: rgb(200, 200, 200);
+  --luna-blue-outline: rgb(68, 169, 224);
+}
+
+@font-face {
+  src: url("assets/fonts/NovaSquare-Regular.ttf");
+  font-family: NovaSquare;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  color: var(--luna-text);
+  background: var(--luna-bg-dark);
+
+  font-family: NovaSquare;
+
+  overflow-x: hidden;
+}
+
+
+.luna-input {
+  font-family: NovaSquare;
+  font-size: 16pt;
+
+  border: 1px solid var(--luna-blue-2);
+  border-radius: 10px;
+
+  background: transparent;
+  margin: 0;
+
+
+  padding: 5px 10px;
+  color: var(--luna-text);
+
+  transition: background-color .25s, border-right-color .5s;
+}
+
+.luna-input:hover, .luna-input:active, .luna-input:focus {
+  border-color: var(--luna-blue-3);
+  background: var(--luna-blue-1);
+}
+
+.form-group > form {
+   display: flex;
+}
+
+.form-group > form > button {
+  /*height: 100%;*/
+  margin: 0 2px;
+  padding: 5px 2px;
+}
+
+.luna-input {
+  flex-grow: 1;
+}

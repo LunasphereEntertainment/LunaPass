@@ -1,0 +1,42 @@
+button {
+  /*display: flex;*/
+  /*justify-content: space-around;*/
+
+  /*align-items: center;*/
+  padding: 8px;
+  margin: 2px;
+
+  min-width: 45px;
+
+  border: 1px solid var(--luna-blue-2);
+  /*background: var(--luna-blue-1);*/
+  background: transparent;
+
+  color: var(--luna-text);
+
+  border-radius: 25%;
+
+  cursor: pointer;
+
+  transition: .25s;
+
+  font-size: 14pt;
+
+}
+
+button:hover, button:active {
+  border-color: var(--luna-blue-3);
+  background: var(--luna-blue-1);
+}
+
+button.luna-danger {
+  color: var(--luna-red-3);
+
+  background: transparent;
+  border-color: var(--luna-red-1);
+}
+
+button.luna-danger:hover, button.luna-danger:active {
+  background: var(--luna-red-1);
+  border-color: var(--luna-red-3);
+}

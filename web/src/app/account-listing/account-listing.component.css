@@ -1,0 +1,62 @@
+.container {
+  padding: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.account-listing {
+  flex-grow: 1;
+
+  display: flex;
+
+  flex-direction: row;
+
+  align-items: center;
+
+  margin: 2px 0;
+
+  border-radius: 15px;
+
+  border: 1px solid transparent;
+
+  padding: 0 5px;
+}
+
+.account-listing:hover {
+  background: var(--luna-frost-bg);
+  transition: .25s;
+  border-color: var(--luna-blue-2);
+  cursor: pointer;
+}
+
+.service-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+
+  border: 1px solid cyan;
+
+  text-align: center;
+  overflow: hidden;
+}
+
+img {
+  width: auto;
+  height: 100%;
+}
+
+.account-info {
+  flex-grow: 1;
+
+  padding: 5px;
+}
+
+h1 {
+  margin: 5px 15px;
+}
+
+h3 {
+  margin: 2px 15px;
+}

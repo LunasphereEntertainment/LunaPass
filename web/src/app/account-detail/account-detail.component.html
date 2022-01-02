@@ -1,0 +1,32 @@
+<div class="details-header">
+  <img class="service-icon" />
+  <h1>View/Edit Account...</h1>
+</div>
+
+<div class="content">
+  <form [formGroup]="accountForm">
+    <div class="form-grid">
+        <label class="form-label">Account Name: </label>
+        <input type="text" class="luna-input" formControlName="name">
+
+        <label class="form-label">URL: </label>
+        <input class="luna-input" formControlName="url">
+
+        <label class="form-label">Username: </label>
+        <input class="luna-input" formControlName="username">
+
+        <label class="form-label">Password: </label>
+        <input class="luna-input" formControlName="password" style="font-family: monospace">
+    </div>
+
+    <div class="form-controls">
+      <button class="luna-danger" title="Discard/Revert Changes">
+        <fa-icon [icon]="discardIcon"></fa-icon>
+      </button>
+
+      <button type="submit" title="Save Changes">
+        <fa-icon [icon]="saveIcon"></fa-icon>
+      </button>
+    </div>
+  </form>
+</div>

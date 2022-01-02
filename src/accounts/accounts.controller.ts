@@ -37,7 +37,13 @@ export class AccountsController {
     const acc = await this.service.getAccount(accountId, req.user.userId);
 
     if (acc) {
-      return new Account(acc.id, acc.name, acc.username, acc.password, acc.url);
+      return new Account(
+        acc.id,
+        acc.name,
+        acc.username,
+        this.encryption.decrypt(acc.password),
+        acc.url,
+      );
     } else {
       throw new NotFoundException('Account with that ID could not be found!');
     }

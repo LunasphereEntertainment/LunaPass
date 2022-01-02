@@ -10,7 +10,8 @@ export class AccountsService {
   listAccounts(owner_id: number) {
     return this.knex('accounts')
       .select('id', 'name', 'username', 'url')
-      .where({ owner_id });
+      .where({ owner_id })
+      .orderBy('name', 'asc');
   }
 
   getAccount(accountId: number, owner_id: number) {

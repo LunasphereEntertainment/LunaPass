@@ -30,6 +30,8 @@
               "src/assets"
             ],
             "styles": [
+              "src/luna.base.css",
+              "src/luna.buttons.css",
               "src/styles.css"
             ],
             "scripts": []
