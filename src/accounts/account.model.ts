@@ -1,13 +1,22 @@
 export class Account {
   id: number;
+  name: string;
+  url: string | undefined;
   username: string;
   password: string | undefined;
-  url: string | undefined;
 
   // categories: string[];
 
-  constructor(id: number, username: string, password?: string, url?: string) {
+  constructor(
+    id: number,
+    name: string,
+    username: string,
+    password?: string,
+    url?: string,
+  ) {
     this.id = id;
+
+    this.name = name;
     this.username = username;
 
     if (password) this.password = password;

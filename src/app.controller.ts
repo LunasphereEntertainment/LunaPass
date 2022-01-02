@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 import { AppService } from './app.service';
 import { EncryptionService } from './encryption.service';
 
@@ -9,12 +9,12 @@ export class AppController {
     private encryption: EncryptionService,
   ) {}
 
-  @Get('test')
-  encryptionTest(): string {
-    const testIn = 'test data',
-      encrypted = this.encryption.encrypt(testIn),
-      decrypted = this.encryption.decrypt(encrypted);
-
-    return `HELLO WORLD\nEncrypting '${testIn}' => ${encrypted}\nDecrypting... '${decrypted}'`;
-  }
+  // @Get('test')
+  // encryptionTest(): string {
+  //   const testIn = 'test data',
+  //     encrypted = this.encryption.encrypt(testIn),
+  //     decrypted = this.encryption.decrypt(encrypted);
+  //
+  //   return `HELLO WORLD\nEncrypting '${testIn}' => ${encrypted}\nDecrypting... '${decrypted}'`;
+  // }
 }

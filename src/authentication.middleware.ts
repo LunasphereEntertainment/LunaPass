@@ -14,7 +14,11 @@ export class AuthenticationMiddleware implements NestMiddleware {
   ) {}
 
   use(req: any, res: any, next: () => void) {
-    const jwt = req.headers['authorization'];
+    let jwt = req.headers['authorization'];
+
+    if (jwt) {
+      jwt = jwt.replace('Bearer ', '');
+    }
 
     const isAuthenticated = jwt ? this.jwtService.verify(jwt) : false;
 

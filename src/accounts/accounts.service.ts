@@ -9,7 +9,7 @@ export class AccountsService {
 
   listAccounts(owner_id: number) {
     return this.knex('accounts')
-      .select('id', 'username', 'url')
+      .select('id', 'name', 'username', 'url')
       .where({ owner_id });
   }
 
@@ -19,24 +19,26 @@ export class AccountsService {
 
   createAccount(
     owner_id: number,
+    name: string,
     username: string,
     password: string,
     url: string,
   ) {
     return this.knex('accounts')
-      .insert({ owner_id, username, password, url })
+      .insert({ owner_id, name, username, password, url })
       .returning('id');
   }
 
   updateAccount(
     accountId: number,
     owner_id: number,
+    name: string,
     username: string,
     password: string,
     url: string,
   ) {
     return this.knex('accounts')
-      .update({ username, password, url })
+      .update({ name, username, password, url })
       .where({ id: accountId, owner_id });
   }
 

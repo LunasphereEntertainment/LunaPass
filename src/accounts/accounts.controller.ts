@@ -6,15 +6,15 @@ import {
   InternalServerErrorException,
   NotFoundException,
   Param,
-  Patch,
   Post,
+  Put,
   Req,
 } from '@nestjs/common';
 import { AccountsService } from './accounts.service';
 import { Account } from './account.model';
 import { EncryptionService } from '../encryption.service';
 
-@Controller('accounts')
+@Controller('api/accounts')
 export class AccountsController {
   constructor(
     private service: AccountsService,
@@ -28,7 +28,7 @@ export class AccountsController {
     const accListing = await this.service.listAccounts(req.user.userId);
 
     return accListing.map(
-      (acc) => new Account(acc.id, acc.username, null, acc.url),
+      (acc) => new Account(acc.id, acc.name, acc.username, null, acc.url),
     );
   }
 
@@ -37,7 +37,7 @@ export class AccountsController {
     const acc = await this.service.getAccount(accountId, req.user.userId);
 
     if (acc) {
-      return new Account(acc.id, acc.username, acc.password, acc.url);
+      return new Account(acc.id, acc.name, acc.username, acc.password, acc.url);
     } else {
       throw new NotFoundException('Account with that ID could not be found!');
     }
@@ -45,6 +45,7 @@ export class AccountsController {
 
   @Post('new')
   async createAccount(
+    @Body('name') name: string,
     @Body('username') username: string,
     @Body('password') password: string,
     @Body('url') url: string,
@@ -52,6 +53,7 @@ export class AccountsController {
   ) {
     const genIds = await this.service.createAccount(
       req.user.userId,
+      name,
       username,
       this.encryption.encrypt(password),
       url,
@@ -59,7 +61,6 @@ export class AccountsController {
 
     if (genIds.length > 0) {
       return new Account(genIds[0], username, password, url);
-      // return genIds[0];
     } else {
       throw new InternalServerErrorException(
         'Auto Increment ID not returned from the database.',
@@ -67,9 +68,10 @@ export class AccountsController {
     }
   }
 
-  @Patch(':id')
+  @Put(':id')
   async updateAccount(
     @Param('id') accountId: number,
+    @Body('name') name: string,
     @Body('username') username: string,
     @Body('password') password: string,
     @Body('url') url: string,
@@ -78,6 +80,7 @@ export class AccountsController {
     const result = await this.service.updateAccount(
       accountId,
       req.user.userId,
+      name,
       username,
       this.encryption.encrypt(password),
       url,

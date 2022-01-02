@@ -6,6 +6,8 @@ import {
   randomBytes,
 } from 'crypto';
 
+const IV_LENGTH = 16;
+
 @Injectable()
 export class EncryptionService {
   private readonly secret: string;
@@ -18,11 +20,11 @@ export class EncryptionService {
     return createHash('sha256')
       .update(secret || this.secret)
       .digest('base64')
-      .substr(0, 32);
+      .substring(0, 32);
   }
 
   encrypt(data: string, secret?: string) {
-    const iv = randomBytes(10);
+    const iv = randomBytes(IV_LENGTH);
 
     const cipher = createCipheriv('aes-256-gcm', this._getKey(secret), iv);
 

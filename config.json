@@ -2,8 +2,8 @@
   "database": {
     "host": "localhost",
     "port": 5432,
-    "user": "luna",
-    "password": "lunasphere",
+    "user": "postgres",
+    "password": "postgres",
     "database": "luna_pass"
   },
   "secret": "lun4sph3r3_R0x!"
