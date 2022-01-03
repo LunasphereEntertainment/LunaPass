@@ -5,17 +5,22 @@
     </h1>
 
     <div class="form-group">
-      <form>
-        <input class="luna-input" type="text" placeholder="Search..." style="font-size: 12pt;">
-        <button title="Search Accounts...">
+      <form (ngSubmit)="runSearch()">
+        <input class="luna-input r-rounded" type="text" placeholder="Search..." style="font-size: 12pt; margin-right: 0" [formControl]="searchField" (input)="delayedRun()">
+        <button title="Search Accounts..." class="l-half-circle" style="margin-left: 0">
           <fa-icon class="fa-lg" [icon]="searchIcon"></fa-icon>
         </button>
       </form>
     </div>
 
-    <button title="Add New" routerLink="/details/0">
-      <fa-icon class="fa-2x" [icon]="addIcon"></fa-icon>
-    </button>
+    <div>
+      <button class="rounded" title="Add New" routerLink="/details/0">
+        <fa-icon class="fa-2x" [icon]="addIcon"></fa-icon>
+      </button>
+      <button class="rounded luna-danger" title="Logout" (click)="logout()">
+        <fa-icon class="fa-2x" [icon]="logoutIcon"></fa-icon>
+      </button>
+    </div>
 
   </div>
 </div>

@@ -11,28 +11,30 @@ import { EncryptionService } from './encryption.service';
 import * as config from '../config.json';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthenticationMiddleware } from './authentication.middleware';
-// import { AuthController } from './auth/auth.controller';
-import { AuthService } from './auth/auth.service';
-import { AppService } from "./app.service";
-import { AuthController } from './auth/auth.controller';
+import { AppService } from './app.service';
+import { LunaModule } from './luna/luna.module';
 
 @Module({
   imports: [
-    KnexModule.forRoot({
-      config: {
-        client: 'pg',
-        connection: config.database,
+    KnexModule.forRoot(
+      {
+        config: {
+          client: 'pg',
+          connection: config.database,
+        },
       },
-    }),
+      'luna-pass',
+    ),
     JwtModule.registerAsync({ useFactory: () => ({ secret: config.secret }) }),
+    LunaModule,
   ],
-  controllers: [AccountsController, AuthController],
+  controllers: [AccountsController],
   providers: [
     AppService,
     AccountsService,
     EncryptionService,
-    { provide: 'CONFIG', useValue: config },
-    AuthService,
+    // { provide: 'CONFIG', useValue: config },
+    { provide: 'SECRET', useValue: config.secret },
   ],
 })
 export class AppModule implements NestModule {

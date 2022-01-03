@@ -14,7 +14,7 @@ button {
 
   color: var(--luna-text);
 
-  border-radius: 25%;
+  border-radius: 25px;
 
   cursor: pointer;
 
@@ -22,6 +22,11 @@ button {
 
   font-size: 14pt;
 
+  font-family: NovaSquare;
+}
+
+button.rounded {
+  border-radius: 25%;
 }
 
 button:hover, button:active {

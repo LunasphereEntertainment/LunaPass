@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="account-listing" *ngFor="let account of accountList" [routerLink]="['/details', account.id]">
+  <div class="account-listing" *ngFor="let account of accountList" (click)="viewPassword(account.id)">
 
     <div class="service-icon" *ngIf="account.icon">
       <img [src]="account.icon" />
@@ -11,13 +11,13 @@
     </div>
 
     <div class="account-actions">
-      <button title="View Password">
+      <button title="View Password" (click)="$event.stopPropagation(); viewPassword(account.id)">
         <fa-icon class="fa-lg" [icon]="showIcon"></fa-icon>
       </button>
       <button title="View/Edit Account" [routerLink]="['/details', account.id]">
         <fa-icon class="fa-lg" [icon]="editIcon"></fa-icon>
       </button>
-      <button class="luna-danger" title="Delete Account">
+      <button class="luna-danger" title="Delete Account" (click)="$event.stopPropagation(); deleteAccount(account.id)">
         <fa-icon class="fa-lg" [icon]="deleteIcon"></fa-icon>
       </button>
     </div>

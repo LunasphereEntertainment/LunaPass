@@ -1,0 +1,38 @@
+<div class="luna-window animated">
+  <div class="title-bar">Password Generator</div>
+  <div class="content">
+    <form style="width: 100%; display: flex; flex-direction: column; flex-grow: 1;" [formGroup]="generatorForm">
+      <input class="luna-input text-center" formControlName="password" />
+
+      <h5 style="margin: 10px 0 0;">Settings</h5>
+
+      <input id="lengthSelect" type="range" min="0" max="24" step="1" formControlName="length" (input)="generate()"/>
+      <label for="lengthSelect" style="margin: 5px auto;">{{ generatorForm.get('length')?.value }}</label>
+
+      <div class="form-check">
+        <input type="checkbox" id="includeLower" formControlName="lowerCase" (change)="generate()"/>|
+        <label for="includeLower">Include Lowercase [a-z]</label>
+      </div>
+
+      <div class="form-check">
+        <input type="checkbox" id="uncludeUpper" formControlName="upperCase" (change)="generate()"/>|
+        <label for="includeLower">Include Uppercase [A-Z]</label>
+      </div>
+
+      <div class="form-check">
+        <input type="checkbox" id="includeNumber" formControlName="numeric" (change)="generate()"/>|
+        <label for="includeLower">Include Numeric [0-9]</label>
+      </div>
+
+      <div class="form-check">
+        <input type="checkbox" id="includeSpecial" formControlName="special" (change)="generate()"/>|
+        <label for="includeLower">Include Special Chars [!"#$%&()[]^_~]</label>
+      </div>
+    </form>
+
+    <div class="actions">
+      <button class="rounded" (click)="close()">Dismiss</button>
+      <button class="rounded" (click)="close(generatorForm.get('password')?.value)">Save</button>
+    </div>
+  </div>
+</div>

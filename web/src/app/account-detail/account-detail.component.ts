@@ -1,9 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { faCheck, faRedoAlt } from '@fortawesome/free-solid-svg-icons';
+import {
+  faArrowCircleLeft,
+  faCheck,
+  faRandom,
+  faRedoAlt,
+} from '@fortawesome/free-solid-svg-icons';
 import { FormControl, FormGroup } from '@angular/forms';
 import { LunaPassService } from '../luna-pass.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Account } from '../../../../src/accounts/account.model';
+import { GeneratorComponent } from '../dialogs/generator/generator.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-account-detail',
@@ -13,6 +20,8 @@ import { Account } from '../../../../src/accounts/account.model';
 export class AccountDetailComponent implements OnInit {
   accountId = 0;
 
+  generateIcon = faRandom;
+  backIcon = faArrowCircleLeft;
   saveIcon = faCheck;
   discardIcon = faRedoAlt;
 
@@ -23,7 +32,12 @@ export class AccountDetailComponent implements OnInit {
     password: new FormControl(''),
   });
 
-  constructor(private service: LunaPassService, private route: ActivatedRoute) {
+  constructor(
+    private service: LunaPassService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private dialog: MatDialog,
+  ) {
     this.route.paramMap.subscribe((params) => {
       if (params.has('id')) {
         const accountId = parseInt(<string>params.get('id'));
@@ -49,12 +63,25 @@ export class AccountDetailComponent implements OnInit {
         .updateAccount(this.accountId, accountDetails)
         .subscribe(() => {
           // Redirect to home
+          this.returnToListing();
         });
     } else {
       this.service.addAccount(accountDetails).subscribe(() => {
         // Redirect to home
+        this.returnToListing();
       });
     }
+  }
+
+  openGenerator() {
+    const dialogRef = this.dialog.open(GeneratorComponent, {
+      width: '700px',
+    });
+    dialogRef.afterClosed().subscribe((newPassword) => {
+      if (newPassword) {
+        this.accountForm.patchValue({ password: newPassword });
+      }
+    });
   }
 
   ngOnInit(): void {
@@ -93,5 +120,9 @@ export class AccountDetailComponent implements OnInit {
     } else {
       return ``;
     }
+  }
+
+  returnToListing() {
+    this.router.navigateByUrl('/accounts');
   }
 }

@@ -5,7 +5,7 @@ import { Account } from './account.model';
 
 @Injectable()
 export class AccountsService {
-  constructor(@InjectKnex() private readonly knex: Knex) {}
+  constructor(@InjectKnex('luna-pass') private readonly knex: Knex) {}
 
   listAccounts(owner_id: number) {
     return this.knex('accounts')

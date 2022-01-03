@@ -6,7 +6,7 @@ import { hash, verify } from 'argon2';
 
 @Injectable()
 export class AuthService {
-  constructor(@InjectKnex() private knex: Knex) {}
+  constructor(@InjectKnex('luna-services') private knex: Knex) {}
 
   private genSalt(length: number) {
     return randomBytes(Math.ceil(length / 2))

@@ -1,0 +1,30 @@
+<!--<div class="login-container start-centered" style="width: 90vw; height: 90vh;">-->
+<div class="luna-window">
+  <div class="title-bar">
+    LunaSphere - Login
+  </div>
+
+  <div class="content">
+
+    <p class="text-danger" *ngIf="errMsg.length > 0">{{errMsg}}</p>
+
+    <div class="luna-form-group">
+      <label for="usernameEntry">Username: </label>
+      <input class="luna-input" id="usernameEntry" [formControl]="usernameField"/>
+    </div>
+
+    <div class="luna-form-group">
+      <label for="passwordEntry">Password: </label>
+      <input class="luna-input" id="passwordEntry" type="password" [formControl]="passwordField" />
+    </div>
+
+    <div class="actions">
+      <button (click)="login()">
+        Login
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<!--</div>-->

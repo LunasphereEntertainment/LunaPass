@@ -30,8 +30,10 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
               "src/luna.base.css",
               "src/luna.buttons.css",
+              "src/luna.window.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -99,6 +101,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
               "src/styles.css"
             ],
             "scripts": []

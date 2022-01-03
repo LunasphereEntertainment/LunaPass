@@ -83,3 +83,57 @@ body {
 .luna-input {
   flex-grow: 1;
 }
+
+.l-rounded {
+  border-radius: 0 25px 25px 0;
+}
+
+.r-rounded {
+  border-radius: 25px 5px 5px 25px;
+}
+
+.l-half-circle {
+  border-radius: 0 25% 25% 0;
+}
+
+.r-half-circle {
+  border-radius: 25% 5px 5px 25%;
+}
+
+
+.bg-danger {
+  background: var(--luna-red-1);
+}
+.text-danger {
+  color: var(--luna-red-3);
+}
+
+.float-right {
+  float: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.luna-form-group {
+  display: flex;
+  flex-direction: row;
+
+  margin: 5px 8px;
+}
+
+.luna-form-group > label {
+  font-size: 14pt;
+  margin: 8px 2px 8px 20px;
+}
+
+.luna-form-group > .luna-input {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.luna-form-group > button {
+  height: 100%;
+  margin: 0;
+}

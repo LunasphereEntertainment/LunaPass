@@ -5,9 +5,7 @@ import { EncryptionService } from './encryption.service';
 
 @Injectable()
 export class AppService {
-  constructor(
-    @InjectKnex() private readonly knex: Knex
-  ) {
+  constructor(@InjectKnex('luna-pass') private readonly knex: Knex) {
     const initJobs = [
       knex.schema.createTableIfNotExists('accounts', (table) => {
         table.bigInteger('owner_id');

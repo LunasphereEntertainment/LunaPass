@@ -10,10 +10,10 @@ const IV_LENGTH = 16;
 
 @Injectable()
 export class EncryptionService {
-  private readonly secret: string;
+  // private readonly secret: string;
 
-  constructor(@Inject('CONFIG') private config: any) {
-    this.secret = config.secret;
+  constructor(@Inject('SECRET') private readonly secret: string) {
+    // this.secret = secret;
   }
 
   private _getKey(secret?: string) {

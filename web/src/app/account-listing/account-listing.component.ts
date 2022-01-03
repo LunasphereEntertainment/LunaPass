@@ -1,6 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountListing, LunaPassService } from '../luna-pass.service';
-import { faLockOpen, faPen, faTimes } from '@fortawesome/free-solid-svg-icons';
+import {
+  faLockOpen,
+  faPencilAlt,
+  faTrash,
+} from '@fortawesome/free-solid-svg-icons';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../dialogs/confirm-dialog/confirm-dialog.component';
+import { PassViewComponent } from '../dialogs/pass-view/pass-view.component';
+import { GeneratorComponent } from '../dialogs/generator/generator.component';
 
 @Component({
   selector: 'app-account-listing',
@@ -11,10 +19,10 @@ export class AccountListingComponent implements OnInit {
   accountList: AccountListing[] | undefined;
 
   showIcon = faLockOpen;
-  editIcon = faPen;
-  deleteIcon = faTimes;
+  editIcon = faPencilAlt;
+  deleteIcon = faTrash;
 
-  constructor(private service: LunaPassService) {}
+  constructor(private service: LunaPassService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.loadAccounts();
@@ -25,13 +33,30 @@ export class AccountListingComponent implements OnInit {
       this.accountList = newList;
     });
     this.accountList = this.service.accounts;
-    // this.service.listAccounts().subscribe(
-    //   (listing) => {
-    //     this.accountList = listing;
-    //   },
-    //   (err) => {
-    //     console.error(err);
-    //   },
-    // );
+  }
+
+  viewPassword(accountId: number) {
+    const dialogInstance = this.dialog.open(PassViewComponent, {
+      width: '550px',
+      data: {
+        accountId,
+      },
+    });
+  }
+
+  deleteAccount(accountId: number) {
+    const dialogInstance = this.dialog.open(ConfirmDialogComponent, {
+      width: '600px',
+    });
+
+    dialogInstance.afterClosed().subscribe((result: boolean) => {
+      if (result) {
+        this.service.deleteAccount(accountId).subscribe(() => {
+          // Do nothing.
+        });
+      } else {
+        // Do nothing.
+      }
+    });
   }
 }

@@ -1,3 +1,8 @@
+<button (click)="returnToListing()">
+  <fa-icon [icon]="backIcon"></fa-icon>
+  Go Back
+</button>
+<br><br>
 <div class="details-header">
   <img class="service-icon" />
   <h1>View/Edit Account...</h1>
@@ -16,16 +21,24 @@
         <input class="luna-input" formControlName="username">
 
         <label class="form-label">Password: </label>
-        <input class="luna-input" formControlName="password" style="font-family: monospace">
+
+        <div class="luna-form-group">
+          <input class="luna-input luna-input-prepend r-rounded" formControlName="password" style="font-family: monospace; flex-grow: 1">
+          <button class="luna-input-append l-rounded" (click)="openGenerator()">
+            <fa-icon [icon]="generateIcon"></fa-icon>
+          </button>
+        </div>
     </div>
 
     <div class="form-controls">
-      <button class="luna-danger" title="Discard/Revert Changes">
+      <button class="luna-danger" title="Discard/Revert Changes" (click)="loadDetails()">
         <fa-icon [icon]="discardIcon"></fa-icon>
+        Discard/Revert Changes
       </button>
 
-      <button type="submit" title="Save Changes">
+      <button type="submit" title="Save Changes" (click)="save()">
         <fa-icon [icon]="saveIcon"></fa-icon>
+        Save Changes
       </button>
     </div>
   </form>

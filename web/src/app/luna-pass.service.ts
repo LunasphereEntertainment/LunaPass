@@ -1,6 +1,8 @@
 import { EventEmitter, Inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Account } from '../../../src/accounts/account.model';
+import { single, takeLast } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +14,7 @@ export class LunaPassService {
   constructor(
     private http: HttpClient,
     @Inject('BASE_URL') private baseUrl: string,
+    private router: Router,
   ) {
     this.loadAccounts();
   }
@@ -36,32 +39,55 @@ export class LunaPassService {
   }
 
   addAccount(account: Account) {
-    return this.http.post<Account>(`${this.baseUrl}/accounts/new`, account);
+    const operation = this.http.post<Account>(
+      `${this.baseUrl}/accounts/new`,
+      account,
+    );
+
+    operation.pipe(single()).subscribe(() => this.loadAccounts());
+
+    return operation;
   }
 
   updateAccount(accountId: number, account: Account) {
-    return this.http.put(`${this.baseUrl}/accounts/${accountId}`, account);
+    const operation = this.http.put(
+      `${this.baseUrl}/accounts/${accountId}`,
+      account,
+    );
+
+    operation.pipe(single()).subscribe(() => this.loadAccounts());
+
+    return operation;
   }
 
   deleteAccount(accountId: number) {
-    return this.http.delete(`${this.baseUrl}/accounts/${accountId}`);
+    const operation = this.http.delete(`${this.baseUrl}/accounts/${accountId}`);
+
+    operation.pipe(single()).subscribe(() => {
+      this.loadAccounts();
+    });
+
+    return operation;
+  }
+
+  search(term: string) {
+    if (term.length > 0) {
+      this.accountsChanged.emit(
+        this.accounts.filter(
+          (acc) =>
+            acc.name.toLowerCase().includes(term.toLowerCase()) ||
+            acc.url?.toLowerCase().includes(term.toLowerCase()),
+        ),
+      );
+    } else {
+      this.accountsChanged.emit(this.accounts);
+    }
+  }
+
+  reload() {
+    this.loadAccounts();
   }
 }
-
-/* getFavicon(url?: string): string {
-    if (!url) {
-      return ``;
-    }
-
-    const re = /https?:\/\/([A-z\.]+)\/?/;
-    const matches = url.match(re);
-
-    if (matches) {
-      return `${matches[0]}/favicon.ico`;
-    } else {
-      return ``;
-    }
-  } */
 
 export class AccountListing extends Account {
   icon: string | undefined;
